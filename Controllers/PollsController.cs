@@ -2,26 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyPolls.Controllers
 {
+
+    /*
+     IDEA:
+     Somebody Creates the poll and gets ID back
+      -- Poll Creation API
+
+     Poll Owner (Who nows the Id) can Publish it or remove
+     -- Poll Publish API
+
+     Poll Types 
+     - Public (Visible for All API users)
+
+     - Accesible by token (Generate token)
+
+     - Private (shared to specific Audience)
+
+        Service does not contain Identity (investigate)
+    
+     */
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class PollsController : ControllerBase
     {
+        private readonly IMediator mediatr;
+
+        public PollsController(IMediator mediatr)
+        {
+            this.mediatr = mediatr;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok();
         }
 
         // POST api/values
